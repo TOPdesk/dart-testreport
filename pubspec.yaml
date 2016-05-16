@@ -6,14 +6,16 @@ description: >
   and provide an API to the interpreted test results.
 
 authors:
-- TOPdesk
 - Roel Spilker <r.spilker@gmail.com>
 
 homepage: https://github.com/topdesk/dart-testreport
 documentation:
 
 dependencies:
-  built_collection: any
+  built_collection: '^1.0.2'
 
 dev_dependencies:
   test: any
+
+environment:
+  sdk: '>=1.8.3 <2.0.0'
