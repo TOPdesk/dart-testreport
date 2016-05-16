@@ -47,8 +47,10 @@ the dart test runner will output the results of the test in `json` format as a s
 
 From this `json` output, it is not easy to see how many tests were executed, how many failed and how much time was spent in each test.
 
+The `Processor` in this project takes the `json` events, and turns them into a `Report`, that is suitable for further processing.
+
 License and contributors
 ------------------------
 
-* The MIT License, see [LICENSE](https://github.com/topdesk/dart-testreport/raw/master/LICENSE).
-* For contributors, see [AUTHORS](https://github.com/topdesk/dart-testreport/raw/master/AUTHORS).
+* The MIT License, see [LICENSE](https://github.com/TOPdesk/dart-testreport/raw/master/LICENSE).
+* For contributors, see [AUTHORS](https://github.com/TOPdesk/dart-testreport/raw/master/AUTHORS).
