@@ -2,9 +2,9 @@
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-import 'package:testreport/model.dart';
-import 'package:testreport/processor.dart';
-import 'processor1.dart';
+import 'package:testreport/src/api/model.dart';
+import 'package:testreport/src/api/processor.dart';
+import 'package:testreport/src/impl/processor1.dart';
 
 class StartProcessor implements Processor {
   Processor _delegate;

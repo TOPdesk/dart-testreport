@@ -3,8 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:collection';
-import 'package:testreport/model.dart';
-import 'package:testreport/processor.dart';
+import 'package:testreport/src/api/model.dart';
+import 'package:testreport/src/api/processor.dart';
 
 class Processor1 implements Processor {
   static const resultCodes = const ['success', 'failure', 'error'];
