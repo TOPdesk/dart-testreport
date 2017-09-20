@@ -1,8 +1,8 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2017, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-import 'package:built_collection/built_collection.dart';
+//import 'package:built_collection/built_collection.dart';
 
 const int unfinished = -1;
 
@@ -10,7 +10,7 @@ class Report {
   final Iterable<Suite> suites;
   final DateTime timestamp;
 
-  Report(Iterable<Suite> suites, {this.timestamp}) : this.suites = new BuiltList<Suite>(suites);
+  Report(Iterable<Suite> suites, {this.timestamp}) : this.suites = new List.unmodifiable(suites);
 }
 
 class Suite {
@@ -29,7 +29,7 @@ class Suite {
   Iterable<Test> get hidden => allTests.where(_hidden);
 
   Suite(this.path, this.platform, Iterable<Test> allTests)
-      : this.allTests = new BuiltList<Test>(allTests);
+      : this.allTests = new List.unmodifiable(allTests);
 }
 
 class Test {
@@ -44,8 +44,8 @@ class Test {
 
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
       Iterable<String> prints, this.isHidden)
-      : this.problems = new BuiltList<Problem>(problems),
-        this.prints = new BuiltList<String>(prints);
+      : this.problems = new List.unmodifiable(problems),
+        this.prints = new List.unmodifiable(prints);
 }
 
 class Problem {

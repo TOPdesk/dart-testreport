@@ -6,6 +6,8 @@ import 'package:testreport/src/api/model.dart';
 import 'package:testreport/src/impl/startprocessor.dart';
 
 abstract class Processor {
+  Processor._();
+
   factory Processor({DateTime timestamp}) {
     return new StartProcessor(timestamp);
   }
