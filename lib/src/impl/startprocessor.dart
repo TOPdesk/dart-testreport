@@ -10,7 +10,7 @@ class StartProcessor implements Processor {
   Processor _delegate;
   final DateTime timestamp;
 
-  StartProcessor(this.timestamp) {}
+  StartProcessor(this.timestamp);
 
   @override
   void process(Map<String, dynamic> event) {

@@ -13,7 +13,7 @@ class Processor1 implements Processor {
   Map<int, _Test> tests = <int, _Test>{};
   final DateTime timestamp;
 
-  Processor1(this.timestamp) {}
+  Processor1(this.timestamp);
 
   @override
   void process(Map<String, dynamic> event) {

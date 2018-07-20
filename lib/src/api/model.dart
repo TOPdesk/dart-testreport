@@ -24,13 +24,13 @@ class Suite {
   final String platform;
   final Iterable<Test> allTests;
 
+  Suite(this.path, this.platform, Iterable<Test> allTests)
+      : this.allTests = new List.unmodifiable(allTests);
+
   Iterable<Test> get tests => allTests.where(_tests);
   Iterable<Test> get skipped => allTests.where(_skips);
   Iterable<Test> get problems => allTests.where(_problems);
   Iterable<Test> get hidden => allTests.where(_hidden);
-
-  Suite(this.path, this.platform, Iterable<Test> allTests)
-      : this.allTests = new List.unmodifiable(allTests);
 }
 
 class Test {
@@ -41,12 +41,12 @@ class Test {
   final Iterable<String> prints;
   final bool isHidden;
 
-  bool get isSkipped => skipReason != null;
-
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
       Iterable<String> prints, this.isHidden)
       : this.problems = new List.unmodifiable(problems),
         this.prints = new List.unmodifiable(prints);
+
+  bool get isSkipped => skipReason != null;
 }
 
 class Problem {
