@@ -1,4 +1,4 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -14,11 +14,11 @@ class StartProcessor implements Processor {
 
   @override
   void process(Map<String, dynamic> event) {
-    var type = event['type'];
+    var type = event['type'] as String;
     if (type == null) throw new ArgumentError("No type in '$event'");
     if (type == 'start') {
       if (_delegate == null) {
-        _delegate = _createDelegate(event['protocolVersion']);
+        _delegate = _createDelegate(event['protocolVersion'] as String);
         return;
       }
       throw new StateError('already started');

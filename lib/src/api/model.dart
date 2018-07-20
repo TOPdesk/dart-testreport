@@ -1,8 +1,6 @@
-// Copyright (c) 2016-2017, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
-
-//import 'package:built_collection/built_collection.dart';
 
 const int unfinished = -1;
 
@@ -10,14 +8,17 @@ class Report {
   final Iterable<Suite> suites;
   final DateTime timestamp;
 
-  Report(Iterable<Suite> suites, {this.timestamp}) : this.suites = new List.unmodifiable(suites);
+  Report(Iterable<Suite> suites, {this.timestamp})
+      : this.suites = new List.unmodifiable(suites);
 }
 
+typedef bool _Filter(Test t);
+
 class Suite {
-  static final _skips = (Test t) => !t.isHidden && t.isSkipped;
-  static final _problems = (Test t) => !t.isHidden && t.problems.isNotEmpty;
-  static final _tests = (Test t) => !t.isHidden;
-  static final _hidden = (Test t) => t.isHidden;
+  static final _Filter _skips = (t) => !t.isHidden && t.isSkipped;
+  static final _Filter _problems = (t) => !t.isHidden && t.problems.isNotEmpty;
+  static final _Filter _tests = (t) => !t.isHidden;
+  static final _Filter _hidden = (t) => t.isHidden;
 
   final String path;
   final String platform;

@@ -1,4 +1,4 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -10,23 +10,23 @@ class Processor1 implements Processor {
   static const resultCodes = const ['success', 'failure', 'error'];
 
   Map<int, _Suite> suites = new SplayTreeMap();
-  Map<int, _Test> tests = {};
+  Map<int, _Test> tests = <int, _Test>{};
   final DateTime timestamp;
 
   Processor1(this.timestamp) {}
 
   @override
   void process(Map<String, dynamic> event) {
-    String type = event['type'];
+    var type = event['type'] as String;
     switch (type) {
       case 'testStart':
-        var test = event['test'];
+        var test = event['test'] as Map<String, dynamic>;
         var testCase = new _Test()
-          ..startTime = event['time']
-          ..name = test['name']
-          ..skipReason = test['metadata']['skipReason'];
+          ..startTime = event['time'] as int
+          ..name = test['name'] as String
+          ..skipReason = test['metadata']['skipReason'] as String;
 
-        tests[test['id']] = testCase;
+        tests[test['id'] as int] = testCase;
         suites[test['suiteID']].tests.add(testCase);
         break;
 
@@ -34,25 +34,27 @@ class Processor1 implements Processor {
         if (!resultCodes.contains(event['result']))
           throw new ArgumentError("Unknown result in '$event'");
 
-        tests[event['testID']]
-          ..endTime = event['time']
-          ..hidden = event['hidden'];
+        tests[event['testID'] as int]
+          ..endTime = event['time'] as int
+          ..hidden = event['hidden'] as bool;
         break;
 
       case 'suite':
-        var suite = event['suite'];
-        suites[suite['id']] = new _Suite()
-          ..path = suite['path']
-          ..platform = suite['platform'];
+        var suite = event['suite'] as Map<String, dynamic>;
+        suites[suite['id'] as int] = new _Suite()
+          ..path = suite['path'] as String
+          ..platform = suite['platform'] as String;
         break;
 
       case 'error':
         tests[event['testID']].problems.add(new Problem(
-            event['error'], event['stackTrace'], event['isFailure']));
+            event['error'] as String,
+            event['stackTrace'] as String,
+            event['isFailure'] as bool));
         break;
 
       case 'print':
-        tests[event['testID']].prints.add(event['message']);
+        tests[event['testID'] as int].prints.add(event['message'] as String);
         break;
 
       case 'done':
@@ -67,7 +69,8 @@ class Processor1 implements Processor {
 
   @override
   Report get report {
-    return new Report(suites.values.map((t) => t.toTestSuite()), timestamp: timestamp);
+    return new Report(suites.values.map((t) => t.toTestSuite()),
+        timestamp: timestamp);
   }
 }
 
@@ -76,8 +79,8 @@ class _Test {
   int startTime;
   int endTime = unfinished;
   String skipReason;
-  List<Problem> problems = [];
-  List<String> prints = [];
+  List<Problem> problems = <Problem>[];
+  List<String> prints = <String>[];
   bool hidden;
 
   Test toTestCase() {
@@ -90,7 +93,7 @@ class _Test {
 class _Suite {
   String path;
   String platform;
-  List<_Test> tests = [];
+  List<_Test> tests = <_Test>[];
 
   Suite toTestSuite() {
     return new Suite(path, platform, tests.map((t) => t.toTestCase()));
