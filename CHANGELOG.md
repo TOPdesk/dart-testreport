@@ -1,3 +1,7 @@
+## 1.0.0
+
+* drop support for Dart 1.x
+
 ## 0.3.1
 
 * dart 2.0 support
