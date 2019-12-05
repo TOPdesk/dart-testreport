@@ -1,4 +1,4 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2019, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -8,9 +8,7 @@ import 'package:testreport/src/impl/startprocessor.dart';
 abstract class Processor {
   Processor._();
 
-  factory Processor({DateTime timestamp}) {
-    return new StartProcessor(timestamp);
-  }
+  factory Processor({DateTime timestamp}) => StartProcessor(timestamp);
 
   void process(Map<String, dynamic> event) {}
 

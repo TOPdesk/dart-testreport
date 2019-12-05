@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2019, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -9,7 +9,7 @@ class Report {
   final DateTime timestamp;
 
   Report(Iterable<Suite> suites, {this.timestamp})
-      : this.suites = new List.unmodifiable(suites);
+      : this.suites = List.unmodifiable(suites);
 }
 
 typedef bool _Filter(Test t);
@@ -25,7 +25,7 @@ class Suite {
   final Iterable<Test> allTests;
 
   Suite(this.path, this.platform, Iterable<Test> allTests)
-      : this.allTests = new List.unmodifiable(allTests);
+      : this.allTests = List.unmodifiable(allTests);
 
   Iterable<Test> get tests => allTests.where(_tests);
   Iterable<Test> get skipped => allTests.where(_skips);
@@ -43,8 +43,8 @@ class Test {
 
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
       Iterable<String> prints, this.isHidden)
-      : this.problems = new List.unmodifiable(problems),
-        this.prints = new List.unmodifiable(prints);
+      : this.problems = List.unmodifiable(problems),
+        this.prints = List.unmodifiable(prints);
 
   bool get isSkipped => skipReason != null;
 }

@@ -15,28 +15,28 @@ class StartProcessor implements Processor {
   @override
   void process(Map<String, dynamic> event) {
     var type = event['type'] as String;
-    if (type == null) throw new ArgumentError("No type in '$event'");
+    if (type == null) throw ArgumentError("No type in '$event'");
     if (type == 'start') {
       if (_delegate == null) {
         _delegate = _createDelegate(event['protocolVersion'] as String);
         return;
       }
-      throw new StateError('already started');
+      throw StateError('already started');
     }
     _delegate.process(event);
   }
 
   @override
   Report get report {
-    if (_delegate == null) throw new StateError('not started');
+    if (_delegate == null) throw StateError('not started');
     return _delegate.report;
   }
 
   Processor _createDelegate(String version) {
     if (version.startsWith('0.')) {
-      return new Processor1(timestamp);
+      return Processor1(timestamp);
     }
-    throw new UnsupportedError(
+    throw UnsupportedError(
         "No suitable processor found for version '$version'. "
         "Supported versions:\n'^0.1.0'");
   }
