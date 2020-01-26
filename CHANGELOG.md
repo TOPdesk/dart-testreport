@@ -1,3 +1,7 @@
+## 1.2.0
+* require dart 2.7+
+* support (ignore) debug events
+
 ## 1.1.0
 * require dart 2.3+
 
