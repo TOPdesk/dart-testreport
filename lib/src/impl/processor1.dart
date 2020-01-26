@@ -59,6 +59,7 @@ class Processor1 implements Processor {
       case 'done':
       case 'allSuites':
       case 'group':
+      case 'debug':
         break;
 
       default:
