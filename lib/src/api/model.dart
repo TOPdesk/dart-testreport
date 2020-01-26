@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2019, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2020, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -9,23 +9,22 @@ class Report {
   final DateTime timestamp;
 
   Report(Iterable<Suite> suites, {this.timestamp})
-      : this.suites = List.unmodifiable(suites);
+      : suites = List.unmodifiable(suites);
 }
 
-typedef bool _Filter(Test t);
-
 class Suite {
-  static final _Filter _skips = (t) => !t.isHidden && t.isSkipped;
-  static final _Filter _problems = (t) => !t.isHidden && t.problems.isNotEmpty;
-  static final _Filter _tests = (t) => !t.isHidden;
-  static final _Filter _hidden = (t) => t.isHidden;
+  static final bool Function(Test t) _skips = (t) => !t.isHidden && t.isSkipped;
+  static final bool Function(Test t) _problems =
+      (t) => !t.isHidden && t.problems.isNotEmpty;
+  static final bool Function(Test t) _tests = (t) => !t.isHidden;
+  static final bool Function(Test t) _hidden = (t) => t.isHidden;
 
   final String path;
   final String platform;
   final Iterable<Test> allTests;
 
   Suite(this.path, this.platform, Iterable<Test> allTests)
-      : this.allTests = List.unmodifiable(allTests);
+      : allTests = List.unmodifiable(allTests);
 
   Iterable<Test> get tests => allTests.where(_tests);
   Iterable<Test> get skipped => allTests.where(_skips);
@@ -43,8 +42,8 @@ class Test {
 
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
       Iterable<String> prints, this.isHidden)
-      : this.problems = List.unmodifiable(problems),
-        this.prints = List.unmodifiable(prints);
+      : problems = List.unmodifiable(problems),
+        prints = List.unmodifiable(prints);
 
   bool get isSkipped => skipReason != null;
 }
