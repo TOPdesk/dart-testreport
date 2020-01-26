@@ -23,6 +23,9 @@ class StartProcessor implements Processor {
       }
       throw StateError('already started');
     }
+    if (_delegate == null) {
+      throw StateError('not started');
+    }
     _delegate.process(event);
   }
 
