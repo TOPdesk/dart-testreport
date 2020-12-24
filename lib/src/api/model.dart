@@ -86,10 +86,13 @@ class Test {
   /// See [TestDoneEvent](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#testdoneevent).
   final bool isHidden;
 
+  /// URL for the current test file
+  final String url;
+
   /// Creates a Test with the given [name], [duration], [skipReason],
   /// [problems], [prints] and [isHidden].
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
-      Iterable<String> prints, this.isHidden)
+      Iterable<String> prints, this.isHidden, this.url)
       : problems = List.unmodifiable(problems),
         prints = List.unmodifiable(prints);
 
