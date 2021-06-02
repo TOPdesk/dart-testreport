@@ -1,18 +1,15 @@
 name: testreport
-version: 1.2.1-dev
+version: 2.0.0-dev
 description: >
   This library can be used to process the results of dart tests.
   It processes data from the `json` output emitted by the dart test runner
   and provide an API to the test results.
 
 homepage: https://github.com/TOPdesk/dart-testreport
-documentation:
-
-dependencies:
 
 dev_dependencies:
   test: any
   pedantic: ^1.9.0
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
