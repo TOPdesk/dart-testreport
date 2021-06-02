@@ -11,7 +11,7 @@ class Report {
   final Iterable<Suite> suites;
 
   /// The timestamp of the test. Might be `null`.
-  final DateTime timestamp;
+  final DateTime? timestamp;
 
   /// Create a report with the given [suites] and [timestamp].
   Report(Iterable<Suite> suites, {this.timestamp})
@@ -29,12 +29,12 @@ class Suite {
   static final bool Function(Test t) _hidden = (t) => t.isHidden;
 
   /// The path to the suite's file.
-  final String path;
+  final String? path;
 
   /// The platform on which the suite is running.
   ///
   /// Might be `null`.
-  final String platform;
+  final String? platform;
 
   /// All [Test]s contained by this Suite, including the hidden tests.
   final Iterable<Test> allTests;
@@ -65,7 +65,7 @@ class Suite {
 /// Describes a single Test.
 class Test {
   /// The name of the test, including prefixes from any containing groups.
-  final String name;
+  final String? name;
 
   /// How long did the test take.
   ///
@@ -73,7 +73,7 @@ class Test {
   final int duration;
 
   /// Indicates why was the test skipped.
-  final String skipReason;
+  final String? skipReason;
 
   /// [Problem]s occurred during the test.
   final Iterable<Problem> problems;
@@ -89,7 +89,7 @@ class Test {
   /// Creates a Test with the given [name], [duration], [skipReason],
   /// [problems], [prints] and [isHidden].
   Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
-      Iterable<String> prints, this.isHidden)
+      Iterable<String?> prints, this.isHidden)
       : problems = List.unmodifiable(problems),
         prints = List.unmodifiable(prints);
 
@@ -102,10 +102,10 @@ class Test {
 /// Based on [ErrorEvent](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#errorevent).
 class Problem {
   /// The result of calling toString() on the error object.
-  final String message;
+  final String? message;
 
   /// The error's stack trace, in the stack_trace package format.
-  final String stacktrace;
+  final String? stacktrace;
 
   /// Whether the error was a TestFailure.
   final bool isFailure;

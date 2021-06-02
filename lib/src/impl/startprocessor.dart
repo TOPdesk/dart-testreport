@@ -7,14 +7,14 @@ import 'package:testreport/src/api/processor.dart';
 import 'package:testreport/src/impl/processor1.dart';
 
 class StartProcessor implements Processor {
-  Processor _delegate;
-  final DateTime timestamp;
+  Processor? _delegate;
+  final DateTime? timestamp;
 
   StartProcessor(this.timestamp);
 
   @override
-  void process(Map<String, dynamic> event) {
-    var type = event['type'] as String;
+  void process(Map<String, dynamic>? event) {
+    var type = event!['type'] as String?;
     if (type == null) throw ArgumentError("No type in '$event'");
     if (type == 'start') {
       if (_delegate == null) {
@@ -26,13 +26,13 @@ class StartProcessor implements Processor {
     if (_delegate == null) {
       throw StateError('not started');
     }
-    _delegate.process(event);
+    _delegate!.process(event);
   }
 
   @override
   Report get report {
     if (_delegate == null) throw StateError('not started');
-    return _delegate.report;
+    return _delegate!.report;
   }
 
   Processor _createDelegate(String version) {

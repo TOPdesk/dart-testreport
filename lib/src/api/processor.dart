@@ -10,13 +10,13 @@ abstract class Processor {
   Processor._();
 
   /// Creates a Processor for the given [timestamp].
-  factory Processor({DateTime timestamp}) => StartProcessor(timestamp);
+  factory Processor({DateTime? timestamp}) => StartProcessor(timestamp);
 
   /// Processes a single [event](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#events).
   ///
   /// Throws a [StateError] is the [StartEvent](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#startevent)
   /// is not the first event.
-  void process(Map<String, dynamic> event) {}
+  void process(Map<String, dynamic>? event) {}
 
   /// The report of the handled events so far.
   ///
