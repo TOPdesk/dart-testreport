@@ -1,3 +1,6 @@
+## 2.0.1
+* tiny improvements
+
 ## 2.0.0
 * Null-safety
 * require dart 2.14+

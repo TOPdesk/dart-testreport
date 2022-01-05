@@ -1,5 +1,5 @@
 name: testreport
-version: 2.0.1-dev
+version: 2.0.1
 description: >
   This library can be used to process the results of dart tests.
   It processes data from the `json` output emitted by the dart test runner
