@@ -1,3 +1,7 @@
+## 2.0.0
+* Null-safety
+* require dart 2.14+
+
 ## 1.2.0
 * require dart 2.7+
 * support (ignore) debug events

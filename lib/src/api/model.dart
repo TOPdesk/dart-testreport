@@ -1,17 +1,17 @@
-// Copyright (c) 2016-2020, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2021, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
 /// Indicates a test that has not yet been been finished.
-const int unfinished = -1;
+const unfinished = -1;
 
 /// Describes the results of a test run.
 class Report {
   /// The [Suite]s in the report.
   final Iterable<Suite> suites;
 
-  /// The timestamp of the test. Might be `null`.
-  final DateTime timestamp;
+  /// The timestamp of the test.
+  final DateTime? timestamp;
 
   /// Create a report with the given [suites] and [timestamp].
   Report(Iterable<Suite> suites, {this.timestamp})
@@ -22,24 +22,21 @@ class Report {
 ///
 /// Based on [Suite](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#suite).
 class Suite {
-  static final bool Function(Test t) _skips = (t) => !t.isHidden && t.isSkipped;
-  static final bool Function(Test t) _problems =
-      (t) => !t.isHidden && t.problems.isNotEmpty;
-  static final bool Function(Test t) _tests = (t) => !t.isHidden;
-  static final bool Function(Test t) _hidden = (t) => t.isHidden;
+  bool _skips(Test t) => !t.isHidden && t.isSkipped;
+  bool _problems(Test t) => !t.isHidden && t.problems.isNotEmpty;
+  bool _tests(Test t) => !t.isHidden;
+  bool _hidden(Test t) => t.isHidden;
 
   /// The path to the suite's file.
   final String path;
 
   /// The platform on which the suite is running.
-  ///
-  /// Might be `null`.
-  final String platform;
+  final String? platform;
 
   /// All [Test]s contained by this Suite, including the hidden tests.
   final Iterable<Test> allTests;
 
-  /// Create a Suite wit hthe given [path], [platform] and [allTests].
+  /// Create a Suite with the given [path], [platform] and [allTests].
   Suite(this.path, this.platform, Iterable<Test> allTests)
       : allTests = List.unmodifiable(allTests);
 
@@ -73,7 +70,7 @@ class Test {
   final int duration;
 
   /// Indicates why was the test skipped.
-  final String skipReason;
+  final String? skipReason;
 
   /// [Problem]s occurred during the test.
   final Iterable<Problem> problems;

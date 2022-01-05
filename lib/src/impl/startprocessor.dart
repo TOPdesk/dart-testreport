@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2021, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -7,14 +7,14 @@ import 'package:testreport/src/api/processor.dart';
 import 'package:testreport/src/impl/processor1.dart';
 
 class StartProcessor implements Processor {
-  Processor _delegate;
-  final DateTime timestamp;
+  Processor? _delegate;
+  final DateTime? timestamp;
 
   StartProcessor(this.timestamp);
 
   @override
   void process(Map<String, dynamic> event) {
-    var type = event['type'] as String;
+    final type = event['type'] as String?;
     if (type == null) throw ArgumentError("No type in '$event'");
     if (type == 'start') {
       if (_delegate == null) {
@@ -26,13 +26,13 @@ class StartProcessor implements Processor {
     if (_delegate == null) {
       throw StateError('not started');
     }
-    _delegate.process(event);
+    _delegate!.process(event);
   }
 
   @override
   Report get report {
     if (_delegate == null) throw StateError('not started');
-    return _delegate.report;
+    return _delegate!.report;
   }
 
   Processor _createDelegate(String version) {

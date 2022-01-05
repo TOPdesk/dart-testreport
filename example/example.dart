@@ -4,17 +4,17 @@ import 'dart:convert';
 import 'package:testreport/testreport.dart';
 
 void main(List<String> args) async {
-  var file = File(args[0]);
-  var lines = LineSplitter().bind(utf8.decoder.bind(file.openRead()));
-  var report = await createReport(file.lastModifiedSync(), lines);
+  final file = File(args[0]);
+  final lines = LineSplitter().bind(utf8.decoder.bind(file.openRead()));
+  final report = await createReport(file.lastModifiedSync(), lines);
 
-  report.suites.forEach((s) {
-    s.problems.forEach((t) {
-      t.problems.forEach((p) {
-        print('${s.path} - ${t.name}: ${p.message}');
-      });
-    });
-  });
+  for (final suite in report.suites) {
+    for (final test in suite.problems) {
+      for (final problem in test.problems) {
+        print('${suite.path} - ${test.name}: ${problem.message}');
+      }
+    }
+  }
 }
 
 Future<Report> createReport(DateTime when, Stream<String> lines) async {

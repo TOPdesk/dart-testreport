@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2021, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -7,10 +7,9 @@ import 'package:testreport/src/impl/startprocessor.dart';
 
 /// The Processor consumes events emitted by the [json reporter](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md).
 abstract class Processor {
-  Processor._();
 
   /// Creates a Processor for the given [timestamp].
-  factory Processor({DateTime timestamp}) => StartProcessor(timestamp);
+  factory Processor({DateTime? timestamp}) => StartProcessor(timestamp);
 
   /// Processes a single [event](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#events).
   ///
