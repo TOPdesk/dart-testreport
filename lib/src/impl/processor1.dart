@@ -44,7 +44,7 @@ class Processor1 implements Processor {
         final suite = event['suite'] as Map<String, dynamic>;
         suites[suite['id'] as int] = _Suite()
           ..path = suite['path'] as String
-          ..platform = suite['platform'] as String;
+          ..platform = (suite['platform'] ?? '') as String;
         break;
 
       case 'error':
