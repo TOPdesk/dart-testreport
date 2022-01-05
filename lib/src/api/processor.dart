@@ -7,7 +7,6 @@ import 'package:testreport/src/impl/startprocessor.dart';
 
 /// The Processor consumes events emitted by the [json reporter](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md).
 abstract class Processor {
-
   /// Creates a Processor for the given [timestamp].
   factory Processor({DateTime? timestamp}) => StartProcessor(timestamp);
 
