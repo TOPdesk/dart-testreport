@@ -19,7 +19,7 @@ void main(List<String> args) async {
 
 Future<Report> createReport(DateTime when, Stream<String> lines) async {
   var processor = Processor(timestamp: when);
-  await for (String line in lines) {
+  await for (final line in lines) {
     processor.process(json.decode(line) as Map<String, dynamic>);
   }
   return processor.report;
