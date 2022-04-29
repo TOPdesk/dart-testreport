@@ -72,6 +72,9 @@ class Test {
   /// Indicates why was the test skipped.
   final String? skipReason;
 
+  /// Indicates whether the test was skipped.
+  final bool skip;
+
   /// [Problem]s occurred during the test.
   final Iterable<Problem> problems;
 
@@ -83,15 +86,15 @@ class Test {
   /// See [TestDoneEvent](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md#testdoneevent).
   final bool isHidden;
 
-  /// Creates a Test with the given [name], [duration], [skipReason],
+  /// Creates a Test with the given [name], [duration], [skipReason], [skip],
   /// [problems], [prints] and [isHidden].
-  Test(this.name, this.duration, this.skipReason, Iterable<Problem> problems,
+  Test(this.name, this.duration, this.skipReason, this.skip, Iterable<Problem> problems,
       Iterable<String> prints, this.isHidden)
       : problems = List.unmodifiable(problems),
         prints = List.unmodifiable(prints);
 
   /// Returns whether the test is skipped.
-  bool get isSkipped => skipReason != null;
+  bool get isSkipped => skip;
 }
 
 /// Describes a problem found during running the test.
