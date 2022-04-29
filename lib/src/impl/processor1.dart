@@ -24,7 +24,8 @@ class Processor1 implements Processor {
         final testCase = _Test()
           ..startTime = event['time'] as int
           ..name = test['name'] as String
-          ..skipReason = test['metadata']['skipReason'] as String?;
+          ..skipReason = test['metadata']['skipReason'] as String?
+          ..skip = test['metadata']['skip'] as bool;
 
         tests[test['id'] as int] = testCase;
         suites[test['suiteID']]!.tests.add(testCase);
@@ -79,6 +80,7 @@ class _Test {
   int startTime = unfinished;
   int endTime = unfinished;
   String? skipReason;
+  bool skip = false;
   List<Problem> problems = <Problem>[];
   List<String> prints = <String>[];
   bool hidden = false;
@@ -87,6 +89,7 @@ class _Test {
         name,
         endTime == unfinished ? unfinished : endTime - startTime,
         skipReason,
+        skip,
         problems,
         prints,
         hidden && problems.isEmpty,
